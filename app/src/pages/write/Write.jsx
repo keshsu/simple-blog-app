@@ -1,6 +1,10 @@
 import { useContext, useState } from "react";
+
 import "./write.css";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
+
 import { Context } from "../../context/Context";
 
 export default function Write() {
@@ -16,9 +20,11 @@ export default function Write() {
       title,
       desc,
     };
+
     if (file) {
-      const data =new FormData();
+      const data = new FormData();
       const filename = Date.now() + file.name;
+
       data.append("name", filename);
       data.append("file", file);
       newPost.photo = filename;
@@ -27,10 +33,12 @@ export default function Write() {
       } catch (err) {}
     }
     try {
-      const res = await axios.post("/posts", newPost);
-      window.location.replace("/post/" + res.data._id);
+      const res = await axios.post("http://localhost:4000/api/posts", newPost);
+
+      window.location.replace("http://localhost:4000/api/post/" + res.data._id);
     } catch (err) {}
   };
+
   return (
     <div className="write">
       {file && (
@@ -39,7 +47,7 @@ export default function Write() {
       <form className="writeForm" onSubmit={handleSubmit}>
         <div className="writeFormGroup">
           <label htmlFor="fileInput">
-            <i className="writeIcon fas fa-plus"></i>
+            <FontAwesomeIcon icon={faPlus} className="writeIcon" />
           </label>
           <input
             type="file"
@@ -51,8 +59,7 @@ export default function Write() {
             type="text"
             placeholder="Title"
             className="writeInput"
-            autoFocus={true}
-            onChange={e=>setTitle(e.target.value)}
+            onChange={(e) => setTitle(e.target.value)}
           />
         </div>
         <div className="writeFormGroup">
@@ -60,7 +67,7 @@ export default function Write() {
             placeholder="Tell your story..."
             type="text"
             className="writeInput writeText"
-            onChange={e=>setDesc(e.target.value)}
+            onChange={(e) => setDesc(e.target.value)}
           ></textarea>
         </div>
         <button className="writeSubmit" type="submit">

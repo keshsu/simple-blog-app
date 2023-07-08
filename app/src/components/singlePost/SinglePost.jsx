@@ -1,7 +1,9 @@
-import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
+
+import axios from "axios";
+
 import { Context } from "../../context/Context";
 import "./singlePost.css";
 
@@ -9,7 +11,7 @@ export default function SinglePost() {
   const location = useLocation();
   const path = location.pathname.split("/")[2];
   const [post, setPost] = useState({});
-  const PF = "http://localhost:5000/images/";
+  const PF = "http://localhost:4000/images/";
   const { user } = useContext(Context);
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
@@ -17,17 +19,19 @@ export default function SinglePost() {
 
   useEffect(() => {
     const getPost = async () => {
-      const res = await axios.get("/posts/" + path);
+      const res = await axios.get("http://localhost:4000/api/posts/" + path);
+
       setPost(res.data);
       setTitle(res.data.title);
       setDesc(res.data.desc);
     };
+
     getPost();
   }, [path]);
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`/posts/${post._id}`, {
+      await axios.delete(`http://localhost:4000/api/posts/${post._id}`, {
         data: { username: user.username },
       });
       window.location.replace("/");
@@ -36,12 +40,12 @@ export default function SinglePost() {
 
   const handleUpdate = async () => {
     try {
-      await axios.put(`/posts/${post._id}`, {
+      await axios.put(`http://localhost:4000/api/posts/${post._id}`, {
         username: user.username,
         title,
         desc,
       });
-      setUpdateMode(false)
+      setUpdateMode(false);
     } catch (err) {}
   };
 
@@ -56,7 +60,6 @@ export default function SinglePost() {
             type="text"
             value={title}
             className="singlePostTitleInput"
-            autoFocus
             onChange={(e) => setTitle(e.target.value)}
           />
         ) : (
@@ -66,10 +69,12 @@ export default function SinglePost() {
               <div className="singlePostEdit">
                 <i
                   className="singlePostIcon far fa-edit"
+                  aria-hidden="true"
                   onClick={() => setUpdateMode(true)}
                 ></i>
                 <i
                   className="singlePostIcon far fa-trash-alt"
+                  aria-hidden="true"
                   onClick={handleDelete}
                 ></i>
               </div>

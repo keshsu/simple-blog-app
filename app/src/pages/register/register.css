@@ -10,6 +10,23 @@
     ),
     url("https://images.pexels.com/photos/317355/pexels-photo-317355.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
   background-size: cover;
+  color: black;
+}
+.register::before {
+  content: "";
+  position: absolute;
+  background: white;
+  border-radius: 20px;
+  width: 80%;
+  height: 80%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.registerFormWrapper {
+  position: relative;
+  z-index: 1;
+  width: 50%;
 }
 
 .registerTitle {
@@ -30,8 +47,14 @@
   padding: 10px;
   background-color: white;
   border: none;
+  border-bottom: 1px solid slategray;
 }
 
+.registerInput:focus{
+  border: 0;
+  outline: 0;
+  border-bottom: 1px solid blue;
+}
 .registerButton {
   margin-top: 20px;
   cursor: pointer;
@@ -40,16 +63,14 @@
   color: white;
   border-radius: 10px;
   padding: 10px;
+  display: inline;
+  width: fit-content;
 }
 
 .registerLoginButton {
-  position: absolute;
-  top: 60px;
-  right: 20px;
-  background-color: lightcoral;
   cursor: pointer;
   border: none;
-  padding: 10px;
-  color: white;
   border-radius: 10px;
+  display: block;
+  margin-top: 30px;
 }
