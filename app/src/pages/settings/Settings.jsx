@@ -1,6 +1,8 @@
 import "./settings.css";
 import { useContext, useState } from "react";
 
+import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 
 import Sidebar from "../../components/sidebar/Sidebar";
@@ -38,7 +40,10 @@ export default function Settings() {
       } catch (err) {}
     }
     try {
-      const res = await axios.put("http://localhost:4000/api/users/" + user._id, updatedUser);
+      const res = await axios.put(
+        "http://localhost:4000/api/users/" + user._id,
+        updatedUser
+      );
 
       setSuccess(true);
       dispatch({ type: "UPDATE_SUCCESS", payload: res.data });
@@ -52,7 +57,6 @@ export default function Settings() {
       <div className="settingsWrapper">
         <div className="settingsTitle">
           <span className="settingsUpdateTitle">Update Your Account</span>
-          <span className="settingsDeleteTitle">Delete Account</span>
         </div>
         <form className="settingsForm" onSubmit={handleSubmit}>
           <h3>Profile Picture</h3>
@@ -62,7 +66,7 @@ export default function Settings() {
               alt=""
             />
             <label htmlFor="fileInput">
-              <i className="settingsPPIcon far fa-user-circle"></i>
+              <FontAwesomeIcon icon={faUserCircle} className="settingsPPIcon" />
             </label>
             <input
               type="file"

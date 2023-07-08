@@ -1,7 +1,16 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
+import {
+  faFacebookSquare,
+  faGithubSquare,
+  faLinkedin,
+} from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
+
+import myImage from "assets/images/me.jpg";
+
 import "./sidebar.css";
 
 export default function Sidebar() {
@@ -21,32 +30,53 @@ export default function Sidebar() {
     <div className="sidebar">
       <div className="sidebarItem">
         <span className="sidebarTitle">ABOUT ME</span>
-        <img
-          src="https://i.pinimg.com/236x/1e/3f/58/1e3f587572a7a7b20bbf1828595a1786--holiday-party-themes-holiday-gift-guide.jpg"
-          alt=""
-        />
+        <img src={myImage} alt="keshav" />
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate qui
-          necessitatibus nostrum illum reprehenderit.
+          I am a professional developer specializing in software development,
+          graphic design, web design, web development, JavaScript engineering,
+          and digital marketing. With a passion for creating visually stunning
+          and user-friendly websites and applications, I leverage my diverse
+          skill set to deliver innovative solutions tailored to your needs.
+          Explore my work and discover how I can help you achieve your digital
+          goals.
         </p>
       </div>
       <div className="sidebarItem">
         <span className="sidebarTitle">CATEGORIES</span>
         <ul className="sidebarList">
           {cats.map((c) => (
-            <Link to={`/?cat=${c.name}`} className="link">
-            <li className="sidebarListItem">{c.name}</li>
-            </Link>
+            <li className="sidebarListItem">
+              <Link to={`/?cat=${c.name}`} className="link">
+                {c.name}
+              </Link>
+            </li>
           ))}
         </ul>
       </div>
       <div className="sidebarItem">
-        <span className="sidebarTitle">FOLLOW US</span>
+        <span className="sidebarTitle">FOLLOW Me</span>
         <div className="sidebarSocial">
-          <i className="sidebarIcon fab fa-facebook-square"></i>
-          <i className="sidebarIcon fab fa-twitter-square"></i>
-          <i className="sidebarIcon fab fa-pinterest-square"></i>
-          <i className="sidebarIcon fab fa-instagram-square"></i>
+          <Link
+            to="https://github.com/keshsu/"
+            className="sidebarIcon"
+            target="_blank"
+          >
+            <FontAwesomeIcon icon={faGithubSquare} />
+          </Link>
+          <Link
+            to="https://www.linkedin.com/in/keshav-bhadel-a36176137/"
+            className="sidebarIcon"
+            target="_blank"
+          >
+            <FontAwesomeIcon icon={faLinkedin} />
+          </Link>
+          <Link
+            to="https://www.facebook.com/keshab.bhadel.9/"
+            className="sidebarIcon"
+            target="_blank"
+          >
+            <FontAwesomeIcon icon={faFacebookSquare} />
+          </Link>
         </div>
       </div>
     </div>

@@ -10,7 +10,7 @@ import Settings from "./pages/settings/Settings";
 import Single from "./pages/single/Single";
 import Write from "./pages/write/Write";
 
-
+import "assets/css/App.css";
 
 function App() {
   const { user } = useContext(Context);
@@ -18,15 +18,20 @@ function App() {
   return (
     <Router>
       <TopBar />
-      <Switch>
-        <Route path="/register">{user ? <Home /> : <Register />}</Route>
-        <Route path="/login">{user ? <Home /> : <Login />}</Route>
-        <Route path="/write">{user ? <Write /> : <Register />}</Route>
-        <Route path="/settings">{user ? <Settings /> : <Register />}</Route>
-        <Route path="/post/:postId">
-          <Single />
-        </Route>
-      </Switch>
+      <div className="container">
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route path="/register">{user ? <Home /> : <Register />}</Route>
+          <Route path="/login">{user ? <Home /> : <Login />}</Route>
+          <Route path="/write">{user ? <Write /> : <Register />}</Route>
+          <Route path="/settings">{user ? <Settings /> : <Register />}</Route>
+          <Route path="/post/:postId">
+            <Single />
+          </Route>
+        </Switch>
+      </div>
     </Router>
   );
 }

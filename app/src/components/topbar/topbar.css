@@ -48,8 +48,10 @@
 .topListItem {
   margin-right: 20px;
   font-size: 18px;
-  font-weight: 300;
   cursor: pointer;
+}
+.topListItem a {
+  text-decoration: none;
 }
 
 .topSearchIcon {
@@ -57,4 +59,11 @@
   color: #666;
   cursor: pointer;
   margin-left: 15px;
+}
+.ps-2topListItem{
+  font-weight: 600;
+  margin-left: 10px;
+  text-decoration: none;
+  background: transparent;
+  border: none;
 }

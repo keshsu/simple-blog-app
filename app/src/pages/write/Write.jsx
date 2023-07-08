@@ -10,6 +10,7 @@ import { Context } from "../../context/Context";
 export default function Write() {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
+  const [categories, setCategories] = useState("");
   const [file, setFile] = useState(null);
   const { user } = useContext(Context);
 
@@ -19,6 +20,7 @@ export default function Write() {
       username: user.username,
       title,
       desc,
+      categories,
     };
 
     if (file) {
@@ -29,8 +31,22 @@ export default function Write() {
       data.append("file", file);
       newPost.photo = filename;
       try {
-        await axios.post("/upload", data);
+        await axios.post("http://localhost:4000/api/upload", data);
       } catch (err) {}
+    }
+    if (categories) {
+      const cats = categories.split(",");
+      console.log(cats);
+
+      cats.forEach((element) => {
+        const category = {
+          name: element,
+        };
+
+        try {
+          axios.post("http://localhost:4000/api/categories", category);
+        } catch (err) {}
+      });
     }
     try {
       const res = await axios.post("http://localhost:4000/api/posts", newPost);
@@ -68,7 +84,15 @@ export default function Write() {
             type="text"
             className="writeInput writeText"
             onChange={(e) => setDesc(e.target.value)}
+            rows={12}
           ></textarea>
+        </div>
+        <div className="writeFormGroup">
+          <input
+            className="writeInput sm"
+            placeholder="blog,science,technology"
+            onChange={(e) => setCategories(e.target.value)}
+          />
         </div>
         <button className="writeSubmit" type="submit">
           Publish

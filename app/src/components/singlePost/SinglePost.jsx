@@ -2,6 +2,8 @@ import { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
 
+import { faEdit, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 
 import { Context } from "../../context/Context";
@@ -67,16 +69,18 @@ export default function SinglePost() {
             {title}
             {post.username === user?.username && (
               <div className="singlePostEdit">
-                <i
-                  className="singlePostIcon far fa-edit"
+                <FontAwesomeIcon
+                  className="singlePostIcon"
+                  icon={faEdit}
                   aria-hidden="true"
                   onClick={() => setUpdateMode(true)}
-                ></i>
-                <i
-                  className="singlePostIcon far fa-trash-alt"
+                />
+                <FontAwesomeIcon
+                  icon={faTrashAlt}
+                  className="singlePostIcon"
                   aria-hidden="true"
                   onClick={handleDelete}
-                ></i>
+                />
               </div>
             )}
           </h1>
